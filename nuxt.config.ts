@@ -21,15 +21,7 @@ export default defineNuxtConfig({
     static: true,
   },
 
-  modules: [
-    [
-      "@nuxtjs/supabase",
-      {
-        redirect: false,
-      },
-    ],
-    "@pinia/nuxt",
-  ],
+  modules: ["@pinia/nuxt"],
 
   devtools: {
     timeline: {
