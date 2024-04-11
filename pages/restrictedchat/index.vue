@@ -3,13 +3,13 @@
     class="d-flex flex-column justify-space-between pt-16"
     style="height: 100vh"
   >
-    <h1 class="text-h3">Chatbot OpenAI 3.5 Turbo 🤖</h1>
+    <h1 class="text-h3">Restricted Chat about Lions 🦁</h1>
     <div class="nice-scroll py-3" v-if="messages.length > 0">
       <!-- Messages loop -->
       <div v-for="(message, index) in messages" :key="index">
         <v-sheet v-if="message.from === 'You'" class="d-flex mb-2">
           <v-sheet
-            color="indigo-lighten-4"
+            color="orange-lighten-4"
             class="py-2 px-3 rounded-te-lg rounded-be-lg rounded-ts-lg"
             max-width="90%"
             min-width="100"
@@ -44,9 +44,10 @@
     <v-sheet v-else>
       <v-alert
         icon="mdi-robot-outline"
-        title="Ask me something"
-        color="indigo-lighten-4"
-        >Type something in the text field to ask the AI a question.</v-alert
+        title="Ask me something about lions"
+        color="orange-lighten-4"
+        >Type something in the text field to ask the AI a question about lions,
+        it won't answer any other question.</v-alert
       >
     </v-sheet>
 
@@ -81,37 +82,17 @@ const route = useRoute();
 async function sendMessage() {
   if (!userInput.value.trim()) return;
 
-  // Prepare the user message
-  const userMessage = {
-    role: "user",
-    content: userInput.value,
-  };
-
-  // Push the user message to the conversation history
   messages.value.push({ from: "You", text: userInput.value });
-
-  // Disable the input field while sending the message
   isSending.value = true;
 
   try {
-    // Include the entire conversation history in the request
-    const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        model: "gpt-3.5-turbo",
-        messages: messages.value.map((message) => ({
-          role: message.from === "You" ? "user" : "assistant",
-          content: message.text,
-        })),
-      },
-      {
-        headers: {
-          Authorization: `Bearer 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`,
-        },
-      }
-    );
+    const response = await axios.post("http://localhost:1234/send-message", {
+      messages: messages.value.map((message) => ({
+        role: message.from === "You" ? "user" : "assistant",
+        content: message.text,
+      })),
+    });
 
-    // Push the ChatGPT response to the conversation history
     messages.value.push({
       from: "Chatbot",
       text: response.data.choices[0].message.content.trim(),
@@ -123,14 +104,10 @@ async function sendMessage() {
       text: "Sorry, there was an error processing your request.",
     });
   } finally {
-    // Enable the input field
     isSending.value = false;
     userInput.value = "";
 
-    // Scroll to the bottom to show the latest message
     await nextTick();
-    const container = document.querySelector(".messages-container");
-    container.scrollTop = container.scrollHeight;
   }
 }
 </script>

@@ -72,7 +72,20 @@
                     class="d-flex justify-center align-center flex-column py-1"
                   >
                     <v-icon class="mx-2">mdi-robot-confused-outline</v-icon>
-                    <v-list-item-title>Chatbot</v-list-item-title>
+                    <v-list-item-title>Open Chatbot</v-list-item-title>
+                  </div>
+                </v-list-item>
+                <v-list-item
+                  @click="drawer = false"
+                  link
+                  to="/restrictedchat"
+                  color="indigo-lighten-1"
+                >
+                  <div
+                    class="d-flex justify-center align-center flex-column py-1"
+                  >
+                    <v-icon class="mx-2">mdi-robot-angry-outline</v-icon>
+                    <v-list-item-title>Restricted Chatbot</v-list-item-title>
                   </div>
                 </v-list-item>
 
