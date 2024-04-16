@@ -52,7 +52,7 @@
 import { ref } from "vue";
 import axios from "axios";
 
-const userInput = ref("");
+const userInput = ref("A bird wearing a skirt");
 const messages = ref([]);
 const isSending = ref(false);
 

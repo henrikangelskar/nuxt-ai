@@ -115,6 +115,19 @@
                     <v-list-item-title>Image Generation</v-list-item-title>
                   </div>
                 </v-list-item>
+                <v-list-item
+                  @click="drawer = false"
+                  link
+                  to="/smartcogniton"
+                  color="indigo-lighten-1"
+                >
+                  <div
+                    class="d-flex justify-center align-center flex-column py-1"
+                  >
+                    <v-icon class="mx-2">mdi-human</v-icon>
+                    <v-list-item-title>Smart Cogniton Demo</v-list-item-title>
+                  </div>
+                </v-list-item>
               </v-list>
             </div>
           </div>
